@@ -1,0 +1,38 @@
+/* === Стили для страницы тренажера умножения === */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #ff4081;
+}
+
+#task {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+input {
+  font-size: 18px;
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 15px;
+  font-weight: bold;
+}
