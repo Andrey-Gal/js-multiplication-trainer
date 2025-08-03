@@ -9,6 +9,17 @@
 <body>
   <h1>Привет, тренажёр здесь 🧠</h1>
 
+<div id="difficulty">
+  <label>Сложность:
+    <select id="level">
+      <option value="5">Лёгкий</option>
+      <option value="10" selected>Средний</option>
+      <option value="20">Сложный</option>
+    </select>
+  </label>
+</div>
+
+
   <button onclick="generateTask()">Новый пример</button>
   <div id="scoreContainer">
   Очки: <span id="score">0</span>

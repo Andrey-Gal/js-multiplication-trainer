@@ -5,12 +5,15 @@ let score = 0;
 let a, b;
 
 function generateTask() {
-  a = Math.floor(Math.random() * 10) + 1;
-  b = Math.floor(Math.random() * 10) + 1;
+  const level = Number(document.getElementById('level').value);
+  a = Math.floor(Math.random() * level) + 1;
+  b = Math.floor(Math.random() * level) + 1;
+
   document.getElementById('task').textContent = `Сколько будет ${a} × ${b}?`;
   document.getElementById('answer').value = '';
   document.getElementById('result').textContent = '';
 }
+
 
 function checkAnswer() {
   const userAnswer = Number(document.getElementById('answer').value);
