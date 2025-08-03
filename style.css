@@ -87,32 +87,54 @@ button {
 /* === Адаптивность для телефона === */
 @media (max-width: 600px) {
   body {
-    padding: 20px;
-    font-size: 18px;
-  }
-
-  .trainer {
-    padding: 20px;
-    font-size: 20px;
-  }
-
-  input[type="number"],
-  button {
-    width: 100%;
-    font-size: 20px;
     padding: 15px;
-    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  #difficulty label,
+  #scoreContainer,
+  #timer,
+  #task,
+  #result {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  select {
+    font-size: 1rem;
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+  input[type="number"] {
+    width: 80%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+
+  button {
+    width: 80%;
+    font-size: 1.1rem;
+    padding: 0.6rem;
+    margin: 0.5rem auto;
+    display: block;
   }
 
   #result {
-    font-size: 18px;
-    margin-top: 15px;
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 
   #score {
-    display: block;
+    display: inline-block;
     margin-top: 10px;
-    font-size: 22px;
+    font-size: 1.2rem;
   }
 }
 
