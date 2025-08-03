@@ -1,3 +1,5 @@
+let mistakes = 0;
+
 // === Тренажер умножения ===
 let score = 0;
 
@@ -26,27 +28,37 @@ function checkAnswer() {
     result.textContent = '✅ Правильно!';
     result.style.color = 'green';
     score++;
+    mistakes = 0;
 
     result.classList.remove('flash');
-void result.offsetWidth; // Хитрый трюк для перезапуска анимации
-result.classList.add('flash');
-
+    void result.offsetWidth;
+    result.classList.add('flash');
   } else {
-  result.textContent = `❌ Неправильно. Правильный ответ: ${correctAnswer}`;
-  result.style.color = 'red';
+    result.textContent = `❌ Неправильно. Правильный ответ: ${correctAnswer}`;
+    result.style.color = 'red';
+    score = 0;
+    mistakes++;
+  }
+
+  scoreDisplay.textContent = score;
+
+  if (mistakes >= 3) {
+  result.textContent = '⚠️ Ты сделал 3 ошибки подряд. Попробуй ещё раз!';
+  result.style.color = 'orange';
+  mistakes = 0;
+  score = 0;
+  scoreDisplay.textContent = score;
 
   result.classList.remove('flash');
   void result.offsetWidth;
   result.classList.add('flash');
-
-  score = 0;
 }
 
 
-  scoreDisplay.textContent = score;
-
-  setTimeout(generateTask, 1500); // Новый пример через 1.5 секунды
+  setTimeout(generateTask, 1500);
 }
+
+
 
 
 generateTask(); // Первый пример при загрузке
