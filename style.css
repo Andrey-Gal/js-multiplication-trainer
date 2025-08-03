@@ -83,3 +83,35 @@ button {
     opacity: 1;
   }
 }
+
+/* === Адаптивность для телефона === */
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+    font-size: 18px;
+  }
+
+  .trainer {
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  input[type="number"],
+  button {
+    width: 100%;
+    font-size: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  #result {
+    font-size: 18px;
+    margin-top: 15px;
+  }
+
+  #score {
+    display: block;
+    margin-top: 10px;
+    font-size: 22px;
+  }
+}
