@@ -9,12 +9,17 @@
 <body>
   <h1>Привет, тренажёр здесь 🧠</h1>
 
-<div id="task">Сколько будет 2 × 3?</div>
-<input type="number" id="answer" />
-<button onclick="checkAnswer()">Проверить</button>
-<div id="result"></div>
+  <button onclick="generateTask()">Новый пример</button>
+  <div id="scoreContainer">
+  Очки: <span id="score">0</span>
+</div>
 
+  <p id="task">Сколько будет ...?</p>
+  <input type="number" id="answer" />
+  <button onclick="checkAnswer()">Проверить</button>
+  <p id="result"></p>
 
   <script src="script.js"></script>
 </body>
+
 </html>
