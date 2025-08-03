@@ -115,3 +115,10 @@ button {
     font-size: 22px;
   }
 }
+
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #555;
+}
