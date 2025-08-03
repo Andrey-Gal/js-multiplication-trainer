@@ -51,4 +51,5 @@ result.classList.add('flash');
 
 generateTask(); // Первый пример при загрузке
 
+document.getElementById('level').addEventListener('change', generateTask);
 
