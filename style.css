@@ -144,3 +144,29 @@ button {
   margin: 10px 0;
   color: #555;
 }
+
+/* Анимация для верного ответа */
+.correct {
+  animation: correctFlash 0.5s ease;
+  background-color: #c8f7c5;
+}
+
+/* Анимация для ошибки */
+.wrong {
+  animation: wrongShake 0.5s ease;
+  background-color: #f7c5c5;
+}
+
+@keyframes correctFlash {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}

@@ -56,20 +56,32 @@ function handleMistake(message) {
 }
 
 function checkAnswer() {
-  const userAnswer = Number(document.getElementById('answer').value);
+  const answerInput = document.getElementById('answer');
+  const result = document.getElementById('result');
+  const userAnswer = Number(answerInput.value);
   const correctAnswer = Number(document.getElementById('task').dataset.answer);
 
   if (userAnswer === correctAnswer) {
-    document.getElementById('result').textContent = '✅ Верно!';
+    result.textContent = '✅ Верно!';
+    result.style.color = 'green';
     score++;
+    answerInput.classList.add('correct');
   } else {
-    document.getElementById('result').textContent = '❌ Неверно!';
+    result.textContent = '❌ Неверно!';
+    result.style.color = 'red';
     mistakes++;
+    answerInput.classList.add('wrong');
   }
 
+  // Удаляем классы через 1 секунду
+  setTimeout(() => {
+    answerInput.classList.remove('correct', 'wrong');
+  }, 1000);
+
   document.getElementById('score').textContent = score;
-  generateTask(); // новый пример сразу после ответа
+  generateTask(); // следующий пример
 }
+
 
 
 function generateTask() {
