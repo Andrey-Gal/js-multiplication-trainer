@@ -56,40 +56,42 @@ function handleMistake(message) {
 }
 
 function checkAnswer() {
-  clearInterval(timer);
   const userAnswer = Number(document.getElementById('answer').value);
-  const correctAnswer = a * b;
-
-  const result = document.getElementById('result');
-  const scoreDisplay = document.getElementById('score');
+  const correctAnswer = Number(document.getElementById('task').dataset.answer);
 
   if (userAnswer === correctAnswer) {
-    result.textContent = '✅ Правильно!';
-    result.style.color = 'green';
+    document.getElementById('result').textContent = '✅ Верно!';
     score++;
-    mistakes = 0;
-
-    result.classList.remove('flash');
-    void result.offsetWidth;
-    result.classList.add('flash');
   } else {
-    result.textContent = `❌ Неправильно. Правильный ответ: ${correctAnswer}`;
-    result.style.color = 'red';
-    score = 0;
+    document.getElementById('result').textContent = '❌ Неверно!';
     mistakes++;
   }
 
-  scoreDisplay.textContent = score;
-
-  if (mistakes >= 3) {
-    result.textContent = '⚠️ Ты сделал 3 ошибки подряд. Попробуй ещё раз!';
-    mistakes = 0;
-    score = 0;
-    scoreDisplay.textContent = score;
-  }
-
-  setTimeout(generateTask, 1500);
+  document.getElementById('score').textContent = score;
+  generateTask(); // новый пример сразу после ответа
 }
 
-generateTask();
-document.getElementById('level').addEventListener('change', generateTask);
+
+function generateTask() {
+  clearInterval(timer);
+  timeLeft = 30;
+  updateTimer();
+
+  const level = Number(document.getElementById('level').value);
+  const operation = Math.random() < 0.5 ? 'multiply' : 'divide';
+
+  if (operation === 'multiply') {
+    a = Math.floor(Math.random() * level) + 1;
+    b = Math.floor(Math.random() * level) + 1;
+    document.getElementById('task').textContent = `Сколько будет ${a} × ${b}?`;
+    document.getElementById('task').dataset.answer = a * b;
+  } else {
+    b = Math.floor(Math.random() * level) + 1;
+    const result = Math.floor(Math.random() * level) + 1;
+    a = b * result; // гарантированное целое деление
+    document.getElementById('task').textContent = `Сколько будет ${a} ÷ ${b}?`;
+    document.getElementById('task').dataset.answer = result;
+  }
+
+  document.getElementById('answer').value = '';
+}
