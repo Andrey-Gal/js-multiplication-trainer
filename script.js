@@ -3,20 +3,34 @@ let mistakes = 0;
 let a, b;
 let timer;
 let timeLeft = 30;
+let gameOver = false;
 
 // === Генерация нового задания ===
 function generateTask() {
-  clearInterval(timer); // Очищаем прошлый таймер
+  clearInterval(timer);
   timeLeft = 30;
   updateTimer();
 
-  const level = Number(document.getElementById('level').value);
-  a = Math.floor(Math.random() * level) + 1;
-  b = Math.floor(Math.random() * level) + 1;
-
-  document.getElementById('task').textContent = `Сколько будет ${a} × ${b}?`;
-  document.getElementById('answer').value = '';
+  gameOver = false;
+  document.getElementById('answer').disabled = false;
   document.getElementById('result').textContent = '';
+  document.getElementById('answer').value = '';
+
+  const level = Number(document.getElementById('level').value);
+  const operation = Math.random() < 0.5 ? 'multiply' : 'divide';
+
+  if (operation === 'multiply') {
+    a = Math.floor(Math.random() * level) + 1;
+    b = Math.floor(Math.random() * level) + 1;
+    document.getElementById('task').textContent = `Сколько будет ${a} × ${b}?`;
+    document.getElementById('task').dataset.answer = a * b;
+  } else {
+    b = Math.floor(Math.random() * level) + 1;
+    const result = Math.floor(Math.random() * level) + 1;
+    a = b * result;
+    document.getElementById('task').textContent = `Сколько будет ${a} ÷ ${b}?`;
+    document.getElementById('task').dataset.answer = result;
+  }
 
   timer = setInterval(() => {
     timeLeft--;
@@ -48,14 +62,19 @@ function handleMistake(message) {
   result.classList.add('flash');
 
   if (mistakes >= 3) {
-    result.textContent = '⚠️ Ты сделал 3 ошибки подряд. Попробуй ещё раз!';
-    mistakes = 0;
+    result.textContent = '💀 Игра окончена! Ты сделал 3 ошибки.';
+    gameOver = true;
+    clearInterval(timer);
+    document.getElementById('answer').disabled = true;
+    return;
   }
 
   setTimeout(generateTask, 1500);
 }
 
 function checkAnswer() {
+  if (gameOver) return;
+
   const answerInput = document.getElementById('answer');
   const result = document.getElementById('result');
   const userAnswer = Number(answerInput.value);
@@ -73,37 +92,23 @@ function checkAnswer() {
     answerInput.classList.add('wrong');
   }
 
-  // Удаляем классы через 1 секунду
   setTimeout(() => {
     answerInput.classList.remove('correct', 'wrong');
   }, 1000);
 
   document.getElementById('score').textContent = score;
-  generateTask(); // следующий пример
+
+  if (mistakes >= 3) {
+    handleMistake('💀 Третья ошибка!');
+  } else {
+    generateTask();
+  }
 }
 
-
-
-function generateTask() {
-  clearInterval(timer);
-  timeLeft = 30;
-  updateTimer();
-
-  const level = Number(document.getElementById('level').value);
-  const operation = Math.random() < 0.5 ? 'multiply' : 'divide';
-
-  if (operation === 'multiply') {
-    a = Math.floor(Math.random() * level) + 1;
-    b = Math.floor(Math.random() * level) + 1;
-    document.getElementById('task').textContent = `Сколько будет ${a} × ${b}?`;
-    document.getElementById('task').dataset.answer = a * b;
-  } else {
-    b = Math.floor(Math.random() * level) + 1;
-    const result = Math.floor(Math.random() * level) + 1;
-    a = b * result; // гарантированное целое деление
-    document.getElementById('task').textContent = `Сколько будет ${a} ÷ ${b}?`;
-    document.getElementById('task').dataset.answer = result;
-  }
-
-  document.getElementById('answer').value = '';
+// === Сброс игры по кнопке ===
+function resetGame() {
+  score = 0;
+  mistakes = 0;
+  document.getElementById('score').textContent = score;
+  generateTask();
 }
